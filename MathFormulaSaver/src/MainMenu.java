@@ -49,7 +49,7 @@ public class MainMenu extends JFrame implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == buttons[0]) {
-			System.out.print("Calculator");
+			Calculator c = new Calculator();
 		}
 		if (e.getSource() == buttons[1]) {
 			System.out.print("Use");
