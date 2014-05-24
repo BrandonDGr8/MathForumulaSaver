@@ -1,0 +1,18 @@
+import java.util.*;
+public class Formula {
+	static Scanner scan = new Scanner(System.in);
+	
+	public static void main(String [] args){
+		addCustomForm();
+	}
+	
+	
+	public static void addCustomForm(){
+		System.out.println("Enter a formula. Put variables in brackets([]); no spaces:");
+		String form = scan.next();
+		System.out.println(form);
+		
+		
+	}
+
+}

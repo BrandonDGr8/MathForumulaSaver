@@ -1,0 +1,44 @@
+import java.io.*;
+import java.util.*;
+
+
+public class Formula {
+	
+	public String title;
+	public String f;
+	
+	public static void main(String [] args){
+		Formula f = new Formula();
+	}
+	
+	
+	public Formula(){
+		addCustomForm();
+	}
+	
+	
+	public static void addCustomForm(){
+		Scanner scan = new Scanner(System.in);
+		System.out.println("Enter a formula. Put variables in brackets([]); no spaces:");
+		String f = scan.next();
+		System.out.println(f);
+		load();
+		
+		
+	}
+	
+	public static void load(){
+		try{
+			BufferedReader in = new BufferedReader(new FileReader("Formulas.txt"));
+			String line;
+			while((line = in.readLine()) != null){
+				System.out.println(line);
+			}
+			in.close();
+		}
+		catch(IOException i){
+			System.out.println("Error: "+i);
+		}
+	}
+
+}

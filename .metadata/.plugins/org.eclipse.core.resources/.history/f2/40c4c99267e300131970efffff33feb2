@@ -1,0 +1,14 @@
+import java.util.*;
+public class Formula {
+	Scanner scan = new Scanner(System.in);
+	
+	
+	public void addCustomForm(){
+		System.out.println("Enter a formula. Put variables in brackets([]):");
+		String form = scan.next();
+		System.out.println(form);
+		
+		
+	}
+
+}

@@ -7,7 +7,9 @@ public class Formula {
 	public static String title;
 	public static String formula;
 
-
+	public static void main(String [] args){
+		Formula f = new Formula();
+	}
 
 
 	public Formula(String t, String f){
