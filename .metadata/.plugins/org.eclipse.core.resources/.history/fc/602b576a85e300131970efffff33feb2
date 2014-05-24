@@ -65,13 +65,13 @@ public class Formula {
 		}
 	}
 
-	public static void findForm(String t){
+	public static void findForm(){
 		try{
 			BufferedReader in = new BufferedReader(new FileReader("Formulas.txt"));
 			String line;
 			int c = 0;
 			while((line = in.readLine()) != null && c<2){
-				if (line.equals(t)){
+				if (line.equals(title)){
 					System.out.println(line);
 					c++;
 				}
@@ -121,6 +121,7 @@ public class Formula {
 
 			String line = null;
 
+//			int c = 0;
 
 					//Read from the original file and write to the new
 					//unless content matches data to be removed.
@@ -131,9 +132,16 @@ public class Formula {
 							pw.println(line);
 							pw.flush();
 
-
+//							c++;
+//							continue;
 						}
-
+//						if (c==1){
+//
+//							pw.println(line);
+//							pw.flush();
+//							break;
+//
+//						}
 					}
 			pw.close();
 			br.close();
@@ -157,30 +165,4 @@ public class Formula {
 		}
 
 	}
-	public static void getTitle(){
-		
-	}
-	
-	public static String getFormula(String t){
-		String a = null;
-		try{
-			BufferedReader in = new BufferedReader(new FileReader("Formulas.txt"));
-			String line;
-			int c = 0;
-			while((line = in.readLine()) != null && c<2){
-				if (line.equals(t)){
-					c++;
-				}
-				if (c==1){
-					a=line;
-				}
-			}
-			in.close();
-		}
-		catch(IOException i){
-			System.out.println("Error: "+i);
-		}
-		return a;
-	}
-	
 }

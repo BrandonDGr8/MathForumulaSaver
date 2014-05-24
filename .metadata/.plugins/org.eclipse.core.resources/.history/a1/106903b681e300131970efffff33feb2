@@ -1,0 +1,46 @@
+import java.io.*;
+import java.util.*;
+
+public class Runner {
+
+	public static boolean run;
+
+	static Scanner read = new Scanner(System.in);
+
+	public static void main(String[] args) {
+		run();
+
+	}
+
+	public static void run(){
+
+		run=true;
+		while(run){
+			askAction();
+
+		}
+
+	}
+
+	public static void askAction(){
+		System.out.println("What do you want to do?\nUseCalculator, UseFormula, CreateFormula, or RemoveFormula? (Case Sensitive)");
+		String answer = read.next();
+		if (answer.equals("UseCalculator")){
+
+		}
+		else if (answer.equals("UseFormula")){
+			Formula.findForm();
+		}
+		else if (answer.equals("CreateFormula")){
+			Formula.addCustomForm();
+		}
+		if (answer.equals("RemoveFormula")){
+			Formula.removeFormula();
+		}
+		
+		else{
+			
+		}
+
+	}
+}

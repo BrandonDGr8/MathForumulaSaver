@@ -23,27 +23,21 @@ public class Runner {
 	}
 
 	public static void askAction(){
-		System.out.println("What do you want to do?\nUseCalculator, UseFormula, CreateFormula, RemoveFormula, or end? (Case Sensitive)");
+		System.out.println("What do you want to do?\nUseCalculator, UseFormula, CreateFormula, or RemoveFormula? (Case Sensitive)");
 		String answer = read.next();
 		if (answer.equals("UseCalculator")){
 
 		}
 		else if (answer.equals("UseFormula")){
-			System.out.println("What is the name of the formula you would like to use?");
-			String t = read.next();
-			Formula.findForm(t);
+			Formula.findForm();
 		}
 		else if (answer.equals("CreateFormula")){
 			Formula.addCustomForm();
 		}
-		else if (answer.equals("RemoveFormula")){
+		if (answer.equals("RemoveFormula")){
 			System.out.println("What is the name of the formula you would like to remove?");
 			String r = read.next();
-			Formula.removeFormula("Formulas.txt", Formula.getFormula(r));
 			Formula.removeFormula("Formulas.txt", r);
-		}
-		else if (answer.equals("end")){
-			run=false;
 		}
 		
 		else{
