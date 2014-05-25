@@ -11,6 +11,8 @@ public class MainMenu extends JFrame implements ActionListener {
 	JButton[] buttons = new JButton[4];
 	
 	MainMenu() {
+		super("MainMenu");
+		setTitle("Main Menu");
 		setSize(225, 350);
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
