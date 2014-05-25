@@ -22,7 +22,7 @@ public class InputVars extends JFrame implements ActionListener {
 	
 	InputVars(String t) {
 		setSize(225, 350);
-		//setResizable(false);
+		setResizable(false);
 		setFont(font);
 		setLayout(new FlowLayout(FlowLayout.CENTER));
 		
