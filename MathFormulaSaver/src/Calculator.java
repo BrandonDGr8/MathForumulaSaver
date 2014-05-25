@@ -18,11 +18,14 @@ public class Calculator extends JFrame implements ActionListener {
 	Dimension zeroButDimension = new Dimension(101, 40);
 	ArrayList<Integer> function = new ArrayList<Integer>();
 	ArrayList<Double> temporary = new ArrayList<Double>();
+	ArrayList<Integer> pFunction = new ArrayList<Integer>();
+	ArrayList<Double> pTemporary = new ArrayList<Double>();
 	JTextArea display1 = new JTextArea(1,10);
 	JTextArea display2 = new JTextArea(1,10);
 	Font font1 = new Font("Monospaced", Font.BOLD, 16);
 	Font font2 = new Font("Calibri", Font.BOLD, 26);
-	boolean reset = false;
+	boolean reset = true;
+	boolean parOpen = false;
 	StringBuilder num = new StringBuilder();
 	
 	Calculator() {
@@ -101,55 +104,140 @@ public class Calculator extends JFrame implements ActionListener {
 			display2.setText("");
 			function.clear();
 			temporary.clear();
+			parOpen = false;
+			reset = false;
 		} catch (NullPointerException npe) {
 		}
 	}
 	
-	public void getSqrt() {
+	public void error() {
+		display2.setText("ERROR");
+		pTemporary.clear();
+		pFunction.clear();
+		temporary.clear();
+		function.clear();
+		reset = true;
+	}
+	
+	public void getPar() {
 		try {
-			display1.append(" sqrt");
-			double value = Math.sqrt(Double.parseDouble(display1.getText()));
-			display2.setText(Double.toString(value));
+			for(int i = 0; i < pFunction.size(); i++) {
+				if(pFunction.get(i)==4) {
+					pTemporary.set(i,  Math.sqrt(pTemporary.get(i)));
+					for (int x = i+1; x < pFunction.size()-1; x++) {
+						pFunction.set(x, pFunction.get(x+1));
+					}
+					pFunction.remove(pFunction.size()-1);
+					i--;
+				}
+			}
+			for(int i = 0; i < pFunction.size(); i++) {
+				if(pFunction.get(i) == 2) {
+					pTemporary.set(i, pTemporary.get(i) * pTemporary.get(i+1));
+					for (int x = i+1; x < pFunction.size()-1; x++) {
+						pFunction.set(x, pFunction.get(x+1));
+						pTemporary.set(x+1, pTemporary.get(x+2));
+					}
+					pFunction.remove(pFunction.size()-1);
+					pTemporary.remove(pTemporary.size()-1);
+					i--;
+				} else if (pFunction.get(i) == 3) {
+					pTemporary.set(i, pTemporary.get(i) / pTemporary.get(i+1));
+					for (int x = i+1; x < pFunction.size()-1; x++) {
+						pFunction.set(x, pFunction.get(x+1));
+						pTemporary.set(x+1, pTemporary.get(x+2));
+					}
+					pFunction.remove(pFunction.size()-1);
+					pTemporary.remove(pTemporary.size()-1);
+					i--;
+				}
+			}
+			for(int i = 0; i < pFunction.size(); i++) {
+				if(pFunction.get(i) == 0) {
+					pTemporary.set(i, pTemporary.get(i) + pTemporary.get(i+1));
+					for (int x = i+1; x < pFunction.size()-1; x++) {
+						pFunction.set(x, pFunction.get(x+1));
+						pTemporary.set(x+1, pTemporary.get(x+2));
+					}
+					i--;
+					pFunction.remove(pFunction.size()-1);
+					pTemporary.remove(pTemporary.size()-1);
+				} else if (pFunction.get(i) == 1) {
+					pTemporary.set(i, pTemporary.get(i) - pTemporary.get(i+1));
+					for (int x = i+1; x < pFunction.size()-1; x++) {
+						pFunction.set(x, pFunction.get(x+1));
+						pTemporary.set(x+1, pTemporary.get(x+2));
+					}
+					i--;
+					pFunction.remove(pFunction.size()-1);
+					pTemporary.remove(pTemporary.size()-1);
+				}
+				
+			}
+			temporary.add(pTemporary.get(0));
+			pFunction.clear();
+			pTemporary.clear();
 		} catch(NumberFormatException e) {
 		}
 	}
 	
 	public void getResult() {
-		temporary.add(Double.parseDouble(num.toString()));
-		try {
+			try {
+			for(int i = 0; i < function.size(); i++) {
+				if(function.get(i) == 4) {
+					temporary.set(i, Math.sqrt(temporary.get(i)));
+					for (int x = i+1; x < pFunction.size()-1; x++) {
+						function.set(x, function.get(x+1));
+					}
+					function.remove(function.size()-1);
+					i--;
+				}
+			}
 			for(int i = 0; i < function.size(); i++) {
 				if(function.get(i) == 2) {
 					temporary.set(i, temporary.get(i) * temporary.get(i+1));
-					for (int x = i+1; x < function.size(); x++) {
+					for (int x = i+1; x < pFunction.size()-1; x++) {
 						function.set(x, function.get(x+1));
 						temporary.set(x+1, temporary.get(x+2));
 					}
+					function.remove(function.size()-1);
+					temporary.remove(temporary.size()-1);
+					i--;
 				} else if (function.get(i) == 3) {
 					temporary.set(i, temporary.get(i) / temporary.get(i+1));
-					for (int x = i+1; x < function.size(); x++) {
+					for (int x = i+1; x < pFunction.size()-1; x++) {
 						function.set(x, function.get(x+1));
 						temporary.set(x+1, temporary.get(x+2));
 					}
+					function.remove(function.size()-1);
+					temporary.remove(temporary.size()-1);
+					i--;
 				}
 			}
 			for(int i = 0; i < function.size(); i++) {
 				if(function.get(i) == 0) {
 					temporary.set(i, temporary.get(i) + temporary.get(i+1));
-					for (int x = i+1; x < function.size(); x++) {
+					for (int x = i+1; x < pFunction.size()-1; x++) {
 						function.set(x, function.get(x+1));
 						temporary.set(x+1, temporary.get(x+2));
 					}
+					function.remove(function.size()-1);
+					temporary.remove(temporary.size()-1);
+					i--;
 				} else if (function.get(i) == 1) {
 					temporary.set(i, temporary.get(i) - temporary.get(i+1));
-					for (int x = i+1; x < function.size(); x++) {
+					for (int x = i+1; x < pFunction.size()-1; x++) {
 						function.set(x, function.get(x+1));
 						temporary.set(x+1, temporary.get(x+2));
 					}
+					function.remove(function.size()-1);
+					temporary.remove(temporary.size()-1);
+					i--;
 				}
 			}
 		} catch(NumberFormatException e) {
 		}
-		DecimalFormat df = new DecimalFormat("###.#");
+		DecimalFormat df = new DecimalFormat("###.######");
 		df.format(temporary.get(0));
 		display2.setText(df.format(temporary.get(0)).toString());
 		num.setLength(0);
@@ -171,23 +259,71 @@ public class Calculator extends JFrame implements ActionListener {
 
 		if(e.getSource() == button[0])
 			clear();
-		if(e.getSource() == button[1])
-			//blah blah blah
-		if(e.getSource() == button[2])
-			getSqrt();
+		if(e.getSource() == button[1]) {
+			if (reset) {
+				display1.setText("");
+				display2.setText("");
+				reset=false;
+			} 
+			if(!parOpen) {
+				display1.append("\u0029");
+				parOpen=true;
+			} else {
+				display1.append("\u0028");
+				if (!num.toString().equals("")) {
+					pTemporary.add(Double.parseDouble(num.toString()));
+				} else {
+					error();
+				}
+				num.setLength(0);
+				parOpen=false;
+				getPar();
+			}
+		}
+		if(e.getSource() == button[2]) {
+			if (reset) {
+				display1.setText("");
+				display2.setText("");
+				reset=false;
+			} 
+			display1.append("\u221A");
+			if(parOpen) {
+				pFunction.add(4);
+			} else {
+				function.add(4);
+			}
+		}	
 		if(e.getSource() == button[3]) {
 			if (reset) {
 				display1.setText("");
 				display1.append(display2.getText());
-				temporary.add(Double.parseDouble(display2.getText()));
+				if (!num.toString().equals("")) {
+					temporary.add(Double.parseDouble(num.toString()));
+					function.add(3);
+				} else {
+					error();
+				}
 				display2.setText("");
 				reset=false;
 			} else {
-				temporary.add(Double.parseDouble(num.toString()));
+				if (parOpen) {
+					if (!num.toString().equals("")) {
+						pTemporary.add(Double.parseDouble(num.toString()));
+						pFunction.add(3);
+					} else {
+						error();
+					}
+				} else {
+					if (!num.toString().equals("")) {
+						temporary.add(Double.parseDouble(num.toString()));
+						function.add(3);
+					} else {
+						error();
+					}
+				}
 			}
 			num.setLength(0);
 			display1.append("/");
-			function.add(3);
 		}
 		if(e.getSource() == button[4]) {
 			if (reset){
@@ -217,15 +353,35 @@ public class Calculator extends JFrame implements ActionListener {
 			if (reset) {
 				display1.setText("");
 				display1.append(display2.getText());
-				temporary.add(Double.parseDouble(display2.getText()));
+				if (!num.toString().equals("")) {
+					temporary.add(Double.parseDouble(display2.getText()));
+					function.add(2);
+				} else {
+					error();
+				}
 				display2.setText("");
 				reset=false;
 			} else {
-				temporary.add(Double.parseDouble(num.toString()));
+				if (parOpen){
+					if (!num.toString().equals("")) {
+						pTemporary.add(Double.parseDouble(num.toString()));
+						pFunction.add(2);
+					} else {
+						error();
+					}
+				} else {
+					if (!num.toString().equals("")) {
+						if (!num.toString().equals("")) {
+							temporary.add(Double.parseDouble(num.toString()));
+							function.add(2);
+						} else {
+							error();
+						}
+					}
+				}
 			}
 			num.setLength(0);
 			display1.append("*");
-			function.add(2);
 		}
 		if(e.getSource() == button[8]) {
 			if (reset){
@@ -255,15 +411,34 @@ public class Calculator extends JFrame implements ActionListener {
 			if (reset) {
 				display1.setText("");
 				display1.append(display2.getText());
-				temporary.add(Double.parseDouble(display2.getText()));
+				
+				if (!num.toString().equals("")) {
+					temporary.add(Double.parseDouble(display2.getText()));
+					function.add(1);
+				} else {
+					error();
+				}
 				display2.setText("");
 				reset = false;
 			} else {
-				temporary.add(Double.parseDouble(num.toString()));
+				if (parOpen){
+					if (!num.toString().equals("")) {
+						pTemporary.add(Double.parseDouble(num.toString()));
+						pFunction.add(1);
+					} else {
+						error();
+					}
+				} else {
+					if (!num.toString().equals("")) {
+						temporary.add(Double.parseDouble(num.toString()));
+						function.add(1);
+					} else {
+						error();
+					}
+				}
 			}
 			num.setLength(0);
 			display1.append("-");
-			function.add(1);
 		}
 		if(e.getSource() == button[12]) {
 			if (reset){
@@ -293,15 +468,34 @@ public class Calculator extends JFrame implements ActionListener {
 			if (reset) {
 				display1.setText("");
 				display1.append(display2.getText());
-				temporary.add(Double.parseDouble(display2.getText()));
+				
+				if (!num.toString().equals("")) {
+					temporary.add(Double.parseDouble(display2.getText()));
+					function.add(0);
+				} else {
+					error();
+				}
 				display2.setText("");
 				reset = false;
 			} else {
-				temporary.add(Double.parseDouble(num.toString()));
+				if (parOpen){
+					if (!num.toString().equals("")) {
+						pTemporary.add(Double.parseDouble(num.toString()));
+						pFunction.add(0);
+					} else {
+						error();
+					}
+				} else {
+					if (!num.toString().equals("")) {
+						temporary.add(Double.parseDouble(num.toString()));
+						function.add(0);
+					} else {
+						error();
+					}
+				}
 			}
 			num.setLength(0);
 			display1.append("+");
-			function.add(0);
 		}
 		if(e.getSource() == button[16]) {
 			if (reset){
@@ -320,6 +514,9 @@ public class Calculator extends JFrame implements ActionListener {
 			num.append("0");
 		}
 		if(e.getSource() == button[18]) {
+			if (!num.toString().equals("")) {
+				temporary.add(Double.parseDouble(num.toString()));
+			}
 			getResult();
 		}
 	}
