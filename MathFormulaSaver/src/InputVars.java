@@ -8,6 +8,8 @@ import javax.swing.*;
 
 public class InputVars extends JFrame implements ActionListener {
 
+	JPanel container = new JPanel();
+	
 	static Font font = new Font("Monospaced", Font.BOLD, 14);
 	static Dimension quesD = new Dimension(200, 40);
 	static Dimension valD = new Dimension(200, 20);
@@ -24,7 +26,8 @@ public class InputVars extends JFrame implements ActionListener {
 		setSize(225, 350);
 		setResizable(false);
 		setFont(font);
-		setLayout(new FlowLayout(FlowLayout.CENTER));
+		//container.setLayout(new FlowLayout(FlowLayout.CENTER));
+		//scrPane.setLayout(new ScrollPaneLayout());
 		
 		var = Formula.variablize(t);
 		for (int i = 0; i < var.size(); i++){
@@ -32,18 +35,28 @@ public class InputVars extends JFrame implements ActionListener {
 			ques.get(i).setPreferredSize(quesD);
 			ques.get(i).setFont(font);
 			ques.get(i).setText("<html><body>Value for "+var.get(i)+". If unknown, type 'null'.</body></html>");
-			add(ques.get(i));
+			//container.add(ques.get(i));
 			
 			val.add(new JTextArea());
 			val.get(i).setPreferredSize(valD);
 			val.get(i).setFont(font);
-			add(val.get(i));
+			//container.add(val.get(i));
+		}
+		
+		container.setLayout(new GridLayout(ques.size()*2+1, 1));
+		for (int i = 0; i < ques.size(); i++) {
+			container.add(ques.get(i));
+			container.add(val.get(i));
 		}
 		calculate.setPreferredSize(butD);
 		calculate.setFont(font);
 		calculate.addActionListener(this);
-		add(calculate);
+		container.add(calculate);
 		
+		JScrollPane scrPane = new JScrollPane(container);
+		
+		add(scrPane);
+		scrPane.setVisible(true);
 		setVisible(true);
 		title = t;
 	}
@@ -91,6 +104,7 @@ public class InputVars extends JFrame implements ActionListener {
 		if(e.getSource()==calculate) {
 			double ans = Formula.calculate(title, var, val);
 			JOptionPane.showMessageDialog(null, "The answer is "+ans+".");
+			
 		}
 		
 	}
