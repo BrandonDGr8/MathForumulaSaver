@@ -12,6 +12,7 @@ public class MainMenu extends JFrame implements ActionListener {
 	
 	MainMenu() {
 		setSize(225, 350);
+		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		setLayout(new GridLayout(4,1));
@@ -55,10 +56,10 @@ public class MainMenu extends JFrame implements ActionListener {
 			System.out.print("Use");
 		}
 		if (e.getSource() == buttons[2]) {
-			System.out.print("Create");
+			CreateForm cf = new CreateForm();
 		}
 		if (e.getSource() == buttons[3]) {
-			System.out.print("Remove");
+			RemForm rf = new RemForm();
 		}
 		
 	}

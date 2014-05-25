@@ -6,15 +6,15 @@ import javax.swing.*;
 
 
 public class CreateForm extends JFrame implements ActionListener {
-	Font font = new Font("Monospaced", Font.BOLD, 16);
-	Dimension labelDim1 = new Dimension(200, 30);
-	Dimension labelDim2 = new Dimension(200, 50);
-	Dimension textDim = new Dimension(200, 95);
+	Font font = new Font("Monospaced", Font.BOLD, 14);
+	Dimension labelDim1 = new Dimension(200, 40);
+	Dimension labelDim2 = new Dimension(200, 60);
+	Dimension textDim = new Dimension(200, 80);
 	Dimension butDim = new Dimension(200, 30);
 	
 	JLabel titleL = new JLabel("<html><body>Enter formula title<br>no spaces:</body></html>");
 	JTextArea titleT = new JTextArea();
-	JLabel formL = new JLabel("<html><body>Enter a formula<br>Put variables in brackets([])<br>no spaces:</body></html>");
+	JLabel formL = new JLabel("<html><body>Enter formula. Put variables in brackets([]). No spaces:</body></html>");
 	JTextArea formT = new JTextArea();
 	JButton go = new JButton("Done");
 	
@@ -22,16 +22,22 @@ public class CreateForm extends JFrame implements ActionListener {
 		super("CreateForm");
 		setSize(225, 350);
 		setResizable(false);
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setFont(font);
 		
 		setLayout(new FlowLayout(FlowLayout.CENTER));
+
 		titleL.setPreferredSize(labelDim1);
+		titleL.setFont(font);
 		titleT.setPreferredSize(textDim);
+		titleT.setFont(font);
 		formL.setPreferredSize(labelDim2);
+		formL.setFont(font);
 		formT.setPreferredSize(textDim);
+		formT.setFont(font);
+		go.addActionListener(this);
 		go.setPreferredSize(butDim);
-		
+		go.setFont(font);
+
 		add(titleL);
 		add(titleT);
 		add(formL);

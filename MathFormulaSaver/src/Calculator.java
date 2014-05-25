@@ -30,7 +30,6 @@ public class Calculator extends JFrame implements ActionListener {
 		setDesign();
 		setSize(225, 350);
 		setResizable(true);
-		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		GridLayout grid = new GridLayout(7,1);
 		setLayout(grid);
 		
