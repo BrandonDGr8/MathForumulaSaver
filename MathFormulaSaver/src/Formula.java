@@ -54,18 +54,32 @@ public class Formula {
 		}
 	}
 
-	public static void loadFile(){
+	public static ArrayList<String> loadFile(){
+		ArrayList<String> titles = new ArrayList<String>();
 		try{
 			BufferedReader in = new BufferedReader(new FileReader("Formulas.txt"));
 			String line;
+			boolean formula = false;
+			StringBuilder temp = new StringBuilder();
 			while((line = in.readLine()) != null){
-				System.out.println(line);
+				if (!formula) {
+					temp.append(line);
+					formula=true;
+				} else {
+					temp.append(line);
+					formula=false;
+					titles.add(temp.toString());
+					temp.setLength(0);
+				}
+				
 			}
 			in.close();
+			
 		}
 		catch(IOException i){
 			System.out.println("Error: "+i);
 		}
+		return titles;
 	}
 
 	public static void findForm(String t){
