@@ -186,7 +186,7 @@ public class Calculator extends JFrame implements ActionListener {
 			for(int i = 0; i < function.size(); i++) {
 				if(function.get(i) == 4) {
 					temporary.set(i, Math.sqrt(temporary.get(i)));
-					for (int x = i+1; x < pFunction.size()-1; x++) {
+					for (int x = i+1; x < function.size()-1; x++) {
 						function.set(x, function.get(x+1));
 					}
 					function.remove(function.size()-1);
@@ -196,7 +196,7 @@ public class Calculator extends JFrame implements ActionListener {
 			for(int i = 0; i < function.size(); i++) {
 				if(function.get(i) == 2) {
 					temporary.set(i, temporary.get(i) * temporary.get(i+1));
-					for (int x = i+1; x < pFunction.size()-1; x++) {
+					for (int x = i+1; x < function.size()-1; x++) {
 						function.set(x, function.get(x+1));
 						temporary.set(x+1, temporary.get(x+2));
 					}
@@ -205,7 +205,7 @@ public class Calculator extends JFrame implements ActionListener {
 					i--;
 				} else if (function.get(i) == 3) {
 					temporary.set(i, temporary.get(i) / temporary.get(i+1));
-					for (int x = i+1; x < pFunction.size()-1; x++) {
+					for (int x = i+1; x < function.size()-1; x++) {
 						function.set(x, function.get(x+1));
 						temporary.set(x+1, temporary.get(x+2));
 					}
@@ -217,7 +217,7 @@ public class Calculator extends JFrame implements ActionListener {
 			for(int i = 0; i < function.size(); i++) {
 				if(function.get(i) == 0) {
 					temporary.set(i, temporary.get(i) + temporary.get(i+1));
-					for (int x = i+1; x < pFunction.size()-1; x++) {
+					for (int x = i+1; x < function.size()-1; x++) {
 						function.set(x, function.get(x+1));
 						temporary.set(x+1, temporary.get(x+2));
 					}
@@ -226,7 +226,7 @@ public class Calculator extends JFrame implements ActionListener {
 					i--;
 				} else if (function.get(i) == 1) {
 					temporary.set(i, temporary.get(i) - temporary.get(i+1));
-					for (int x = i+1; x < pFunction.size()-1; x++) {
+					for (int x = i+1; x < function.size()-1; x++) {
 						function.set(x, function.get(x+1));
 						temporary.set(x+1, temporary.get(x+2));
 					}
