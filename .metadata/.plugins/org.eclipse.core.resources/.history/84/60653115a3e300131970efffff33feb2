@@ -216,17 +216,11 @@ public class Formula {
 		ArrayList<String> var = valueToVar(t);
 		for (int i = 0; i<f.length(); i++){
 			String c = Character.toString(f.charAt(i));
-			if (!(c.equals("[")))
-				if(!(c.equals("]")))
-					newForm+=c;
+			if (!c.equals("[") || !c.equals("]"))
+				newForm+=c;
 			if (c.equals("[")){
 				if (a<var.size()){
-					if (var.get(a).equals("null")){
-						newForm+=Character.toString(f.charAt(i+1));
-					}
-					else{
-						newForm+=var.get(a);
-					}
+					newForm+=var.get(a);
 					a++;
 					i++;
 				}
@@ -234,14 +228,14 @@ public class Formula {
 		}
 		return newForm;
 	}
-
+	
 	public static void main(String[] args) {
 		System.out.println(setVariables("Formula"));
 
 	}
 
-	//	public static int calculate(){
-	//		
-	//	}
+//	public static int calculate(){
+//		
+//	}
 
 }

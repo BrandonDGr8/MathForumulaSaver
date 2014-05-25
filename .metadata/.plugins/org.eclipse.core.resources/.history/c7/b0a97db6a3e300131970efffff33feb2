@@ -216,9 +216,7 @@ public class Formula {
 		ArrayList<String> var = valueToVar(t);
 		for (int i = 0; i<f.length(); i++){
 			String c = Character.toString(f.charAt(i));
-			if (!(c.equals("[")))
-				if(!(c.equals("]")))
-					newForm+=c;
+			newForm+=c;
 			if (c.equals("[")){
 				if (a<var.size()){
 					if (var.get(a).equals("null")){

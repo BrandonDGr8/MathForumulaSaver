@@ -28,7 +28,7 @@ public class Formula {
 		System.out.println("Enter a formula. Put variables in brackets([]); no spaces:");
 		String f = scan.next();
 		addText(f);
-
+		
 		System.out.println("Your formula \""+t+"\" ("+f+") was created!");
 
 	}
@@ -122,19 +122,19 @@ public class Formula {
 			String line = null;
 
 
-			//Read from the original file and write to the new
-			//unless content matches data to be removed.
-			while ((line = br.readLine()) != null) {
+					//Read from the original file and write to the new
+					//unless content matches data to be removed.
+					while ((line = br.readLine()) != null) {
 
-				if (!line.trim().equals(lineToRemove)) {
+						if (!line.trim().equals(lineToRemove)) {
 
-					pw.println(line);
-					pw.flush();
+							pw.println(line);
+							pw.flush();
 
 
-				}
+						}
 
-			}
+					}
 			pw.close();
 			br.close();
 
@@ -158,9 +158,9 @@ public class Formula {
 
 	}
 	public static void getTitle(){
-
+		
 	}
-
+	
 	public static String getFormula(String t){
 		String a = null;
 		try{
@@ -182,66 +182,5 @@ public class Formula {
 		}
 		return a;
 	}
-
-	public static ArrayList<String> variablize(String t){
-		String f = getFormula(t);
-		ArrayList<String> var = new ArrayList<String>();
-		for (int i = 0; i<f.length(); i++){
-			String c = Character.toString(f.charAt(i));
-			if (c.equals("[")){
-				var.add(Character.toString(f.charAt(i+1)));
-			}
-		}
-		return var;
-	}
-
-	public static ArrayList<String> valueToVar(String t){
-		Scanner scan = new Scanner(System.in);
-		ArrayList<String> var = variablize(t);
-		for (int i = 0; i < var.size(); i++){
-			System.out.println("What is the value for "+var.get(i)+"? If the value for the variable is unknown, type 'null'.");
-			String a = scan.next();
-			var.set(i, a);
-			if (a.equals("null")){
-				var.set(i, var.get(i));
-			}
-		}
-		return var;
-	}
-
-	public static String setVariables(String t){
-		int a = 0;
-		String f = getFormula(t);
-		String newForm = "";
-		ArrayList<String> var = valueToVar(t);
-		for (int i = 0; i<f.length(); i++){
-			String c = Character.toString(f.charAt(i));
-			if (!(c.equals("[")))
-				if(!(c.equals("]")))
-					newForm+=c;
-			if (c.equals("[")){
-				if (a<var.size()){
-					if (var.get(a).equals("null")){
-						newForm+=Character.toString(f.charAt(i+1));
-					}
-					else{
-						newForm+=var.get(a);
-					}
-					a++;
-					i++;
-				}
-			}
-		}
-		return newForm;
-	}
-
-	public static void main(String[] args) {
-		System.out.println(setVariables("Formula"));
-
-	}
-
-	//	public static int calculate(){
-	//		
-	//	}
-
+	
 }
