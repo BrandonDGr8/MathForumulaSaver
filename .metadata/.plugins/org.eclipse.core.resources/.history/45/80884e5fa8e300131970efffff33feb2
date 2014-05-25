@@ -1,10 +1,6 @@
 import java.io.*;
 import java.util.*;
 
-import javax.script.ScriptEngineManager;
-import javax.script.ScriptEngine;
-import javax.script.ScriptException;
-
 
 public class Formula {
 
@@ -174,12 +170,10 @@ public class Formula {
 			while((line = in.readLine()) != null && c<2){
 				if (line.equals(t)){
 					c++;
-					a=in.readLine();
 				}
-				//				if (c==1){
-				//					a=line;
-				//					c++;
-				//				}
+				if (c==1){
+					a=line;
+				}
 			}
 			in.close();
 		}
@@ -195,8 +189,7 @@ public class Formula {
 		for (int i = 0; i<f.length(); i++){
 			String c = Character.toString(f.charAt(i));
 			if (c.equals("[")){
-				if (!isNumeric(Character.toString(f.charAt(i+1))))
-					var.add(Character.toString(f.charAt(i+1)));
+				var.add(Character.toString(f.charAt(i+1)));
 			}
 		}
 		return var;
@@ -242,50 +235,13 @@ public class Formula {
 		return newForm;
 	}
 
-	public static void main(String[] args) {
-		System.out.println(calculate("Formula2"));
-
-	}
-
-	public static double calculate(String t){
-		ScriptEngineManager mgr = new ScriptEngineManager();
-		ScriptEngine engine = mgr.getEngineByName("JavaScript");
-		String form = setVariables(t);
-		String[] parts = form.split("=");
-		String part1 = parts[0];
-		String part2 = parts[1];
-		if (isNumeric(part1)){
-			try {
-				return (Double) engine.eval(part1);
-			} catch (ScriptException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+		public static void main(String[] args) {
+			System.out.println(calculate());
+	
 		}
-		else {
-			try {
-				return (Double) engine.eval(part2);
-			} catch (ScriptException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
-		return 0.0;
+
+	public static double calculate(){
+		return Double.parseDouble("5")*Double.parseDouble("4");
 	}
-
-	public static boolean isNumeric(String str)  
-	{  
-		try  
-		{  
-			double d = Double.parseDouble(str);  
-		}  
-		catch(NumberFormatException nfe)  
-		{  
-			return false;  
-		}  
-		return true;  
-	}
-
-
 
 }
