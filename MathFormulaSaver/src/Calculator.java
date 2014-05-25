@@ -8,7 +8,7 @@ public class Calculator extends JFrame implements ActionListener {
 	
 	JPanel[] row = new JPanel[7];
 	JButton[] button = new JButton[19];
-	String[] buttonString = {	"AC", "()", "√", "/",
+	String[] buttonString = {	"AC", "()", "\u221A", "/",
 								"7", "8", "9", "*",
 								"4", "5", "6", "-",
 								"1", "2", "3", "+",
@@ -29,7 +29,7 @@ public class Calculator extends JFrame implements ActionListener {
 		super("Calculator");
 		setDesign();
 		setSize(225, 350);
-		setResizable(true);
+		setResizable(false);
 		GridLayout grid = new GridLayout(7,1);
 		setLayout(grid);
 		
