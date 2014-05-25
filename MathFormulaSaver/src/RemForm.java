@@ -12,7 +12,8 @@ public class RemForm extends JFrame implements ActionListener  {
 	Dimension butDim = new Dimension(200, 30);
 	
 	JLabel label = new JLabel("<html><body>What is the name of the formula you would like to remove?</body></html>");
-	JTextArea title = new JTextArea();
+	//JTextArea title = new JTextArea();
+	JComboBox choose = new JComboBox(Formula.loadFile().toArray());
 	JButton go = new JButton("Done");
 	
 	RemForm() {
@@ -26,9 +27,14 @@ public class RemForm extends JFrame implements ActionListener  {
 		label.setPreferredSize(lDim);
 		label.setFont(font);
 		add(label);
-		title.setPreferredSize(tDim);
+		
+		choose.setPreferredSize(tDim);
+		choose.setFont(font);
+		add(choose);
+		/*title.setPreferredSize(tDim);
 		title.setFont(font);
-		add(title);
+		add(title);*/
+		
 		go.addActionListener(this);
 		go.setPreferredSize(butDim);
 		go.setFont(font);
@@ -39,15 +45,21 @@ public class RemForm extends JFrame implements ActionListener  {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == go) {
-			String r = title.getText();
+			String sel = choose.getSelectedItem().toString();
+			String[] titleAndForm = sel.split("\\:");
+			String selection = titleAndForm[0];
+			String[] form = titleAndForm[1].split(" ");
+			String formula = form[1];
+			
+			//String r = title.getText();
 			Object[] option = {"Yes, remove this formula", "No, I want to keep this formula"};
-			int sure = JOptionPane.showOptionDialog(null, "Are you sure you want to remove your formula \""+r+"\"?", "Are you sure?", JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, option, option[1]);
+			int sure = JOptionPane.showOptionDialog(null, "Are you sure you want to remove your formula \""+selection+"\" ("+formula+")?", "Are you sure?", JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, option, option[1]);
 			
 			if (sure == 0) {
-				Formula.removeFormula("Formulas.txt", Formula.getFormula(r));
-				Formula.removeFormula("Formulas.txt", r);
+				Formula.removeFormula("Formulas.txt", Formula.getFormula(selection));
+				Formula.removeFormula("Formulas.txt", selection);
 				
-				JOptionPane.showMessageDialog(null, "Your formula \""+r+"\" was removed!");
+				JOptionPane.showMessageDialog(null, "Your formula \""+selection+"\" ("+formula+") was removed!");
 			}
 		}
 		

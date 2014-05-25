@@ -57,7 +57,7 @@ public class SelForm extends JFrame implements ActionListener {
 		if (e.getSource() == go) {
 			//InputVars iv = new InputVars(form.getText());
 			String sel = choose.getSelectedItem().toString();
-			String[] titleAndForm = sel.split("\\[");
+			String[] titleAndForm = sel.split("\\:");
 			String selection = titleAndForm[0];
 			InputVars iv = new InputVars(selection);
 		}
