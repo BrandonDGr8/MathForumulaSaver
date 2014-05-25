@@ -55,7 +55,7 @@ public class MainMenu extends JFrame implements ActionListener {
 			Calculator c = new Calculator();
 		}
 		if (e.getSource() == buttons[1]) {
-			System.out.print("Use");
+			SelForm uf = new SelForm();
 		}
 		if (e.getSource() == buttons[2]) {
 			CreateForm cf = new CreateForm();

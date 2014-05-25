@@ -9,35 +9,35 @@ import javax.script.ScriptException;
 import javax.swing.*;
 
 
-public class UseForm extends JFrame implements ActionListener {
+public class SelForm extends JFrame implements ActionListener {
 	
 	static Font font = new Font("Monospaced", Font.BOLD, 14);
 	static Dimension quesD = new Dimension(200, 60);
 	static Dimension formD = new Dimension(200, 60);
 	static Dimension butD = new Dimension(200, 30);
-	static Dimension varD = new Dimension(200, 30);
-	static Dimension valD = new Dimension(200, 30);
+	//static Dimension varD = new Dimension(200, 30);
+	//static Dimension valD = new Dimension(200, 30);
 	
 	static JPanel start = new JPanel();
 	JLabel ques = new JLabel("<html><body>Which formula would you like to use?</body></html");
 	JTextArea form = new JTextArea();
 	JButton go = new JButton("Done");
 	
-	static JPanel calc = new JPanel();	
-	static ArrayList<JLabel> var = new ArrayList<JLabel>();
-	static ArrayList<JTextArea> val = new ArrayList<JTextArea>();
-	JButton calculate = new JButton("Calculate");
+	//static JPanel calc = new JPanel();	
+	//static ArrayList<JLabel> var = new ArrayList<JLabel>();
+	//static ArrayList<JTextArea> val = new ArrayList<JTextArea>();
+	//JButton calculate = new JButton("Calculate");
 	
-	static JPanel done = new JPanel();
-	static JLabel ansL = new JLabel("Answer:");
-	static JTextArea ansV = new JTextArea();
+	//static JPanel done = new JPanel();
+	//static JLabel ansL = new JLabel("Answer:");
+	//static JTextArea ansV = new JTextArea();
 	
-	UseForm() {
-		super("UseForm");
+	SelForm() {
+		super("SelForm");
 		setSize(225, 350);
-		//setResizable(false);
+		setResizable(false);
 		setFont(font);
-		setLayout(new FlowLayout(FlowLayout.CENTER));
+		//setLayout(new FlowLayout(FlowLayout.CENTER));
 		
 		start.setLayout(new FlowLayout(FlowLayout.CENTER));
 		
@@ -57,20 +57,21 @@ public class UseForm extends JFrame implements ActionListener {
 		add(start);
 		//add(calc);
 		//add(done);
-		//start.setVisible(true);
+		start.setVisible(true);
 		setVisible(true);
 	}
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == go) {
-			calc.setLayout(new FlowLayout(FlowLayout.CENTER));
-			createComps(form.getText());
-			start.setVisible(false);
-			calc.setVisible(true);
+			//calc.setLayout(new FlowLayout(FlowLayout.CENTER));
+			//createComps(form.getText());
+			//start.setVisible(false);
+			//calc.setVisible(true);
+			InputVars iv = new InputVars(form.getText());
 		}
 		
-		if (e.getSource() == calculate) {	
+		/*if (e.getSource() == calculate) {	
 			double ans = Formula.calculate(form.getText());
 			done.setLayout(new FlowLayout(FlowLayout.CENTER));
 			done.add(ansL);
@@ -80,10 +81,10 @@ public class UseForm extends JFrame implements ActionListener {
 			
 			calc.setVisible(false);
 			done.setVisible(true);
-		}
+		}*/
 	}
 	
-	public static void createComps(String t) {
+	/*public static void createComps(String t) {
 		ArrayList<String> vars = Formula.variablize(t);
 		for (int i = 0; i < vars.size(); i++){
 			var.add(new JLabel());
@@ -97,8 +98,9 @@ public class UseForm extends JFrame implements ActionListener {
 			val.get(i).setFont(font);
 			calc.add(val.get(i));
 		}
-	}
-	public static ArrayList<String> valueToVar(String t){
+	}*/
+	
+	/*public static ArrayList<String> valueToVar(String t){
 		ArrayList<String> vars = Formula.variablize(t);
 		for (int i = 0; i < vars.size(); i++){
 			String a = val.get(i).toString();
@@ -160,10 +162,10 @@ public class UseForm extends JFrame implements ActionListener {
 			}
 		}
 		return 0.0;
-	}
+	}*/
 	
 	public static void main(String[] args) {
-		UseForm uf = new UseForm();
+		SelForm uf = new SelForm();
 
 	}
 }

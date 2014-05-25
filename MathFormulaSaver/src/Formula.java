@@ -4,6 +4,7 @@ import java.util.*;
 import javax.script.ScriptEngineManager;
 import javax.script.ScriptEngine;
 import javax.script.ScriptException;
+import javax.swing.JTextArea;
 
 
 public class Formula {
@@ -200,37 +201,34 @@ public class Formula {
 		return var;
 	}
 
-	public static ArrayList<String> valueToVar(String t){
-		Scanner scan = new Scanner(System.in);
-		ArrayList<String> var = variablize(t);
+	public static ArrayList<String> valueToVar(String t, ArrayList<String> var, ArrayList<JTextArea> val){
 		for (int i = 0; i < var.size(); i++){
-			System.out.println("What is the value for "+var.get(i)+"? If the value for the variable is unknown, type 'null'.");
-			String a = scan.next();
-			var.set(i, a);
-			if (a.equals("null")){
-				var.set(i, var.get(i));
+				String a = val.get(i).getText();
+				var.set(i, a);
+				if (a.equals("null")){
+					var.set(i, var.get(i));
+				}
 			}
-		}
 		return var;
 	}
 
-	public static String setVariables(String t){
+	public static String setVariables(String t, ArrayList<String> var, ArrayList<JTextArea> val){
 		int a = 0;
 		String f = getFormula(t);
 		String newForm = "";
-		ArrayList<String> var = valueToVar(t);
+		ArrayList<String> vars = valueToVar(t, var, val);
 		for (int i = 0; i<f.length(); i++){
 			String c = Character.toString(f.charAt(i));
 			if (!(c.equals("[")))
 				if(!(c.equals("]")))
 					newForm+=c;
 			if (c.equals("[")){
-				if (a<var.size()){
-					if (var.get(a).equals("null")){
+				if (a<vars.size()){
+					if (vars.get(a).equals("null")){
 						newForm+=Character.toString(f.charAt(i+1));
 					}
 					else{
-						newForm+=var.get(a);
+						newForm+=vars.get(a);
 					}
 					a++;
 					i++;
@@ -241,14 +239,14 @@ public class Formula {
 	}
 
 	public static void main(String[] args) {
-		System.out.println(calculate("Formula2"));
+		//System.out.println(calculate("Formula2"));
 
 	}
 
-	public static double calculate(String t){
+	public static double calculate(String t, ArrayList<String> var, ArrayList<JTextArea> val){
 		ScriptEngineManager mgr = new ScriptEngineManager();
 		ScriptEngine engine = mgr.getEngineByName("JavaScript");
-		String form = setVariables(t);
+		String form = setVariables(t, var, val);
 		String[] parts = form.split("=");
 		String part1 = parts[0];
 		String part2 = parts[1];
