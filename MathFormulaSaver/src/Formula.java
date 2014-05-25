@@ -12,8 +12,6 @@ public class Formula {
 	public static String formula;
 
 
-
-
 	public Formula(){
 		loadFile();
 		addCustomForm();

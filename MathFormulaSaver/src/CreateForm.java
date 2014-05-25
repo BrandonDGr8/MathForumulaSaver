@@ -28,20 +28,23 @@ public class CreateForm extends JFrame implements ActionListener {
 
 		titleL.setPreferredSize(labelDim1);
 		titleL.setFont(font);
+		add(titleL);
+		
 		titleT.setPreferredSize(textDim);
 		titleT.setFont(font);
+		add(titleT);
+		
 		formL.setPreferredSize(labelDim2);
 		formL.setFont(font);
+		add(formL);
+		
 		formT.setPreferredSize(textDim);
 		formT.setFont(font);
+		add(formT);
+		
 		go.addActionListener(this);
 		go.setPreferredSize(butDim);
 		go.setFont(font);
-
-		add(titleL);
-		add(titleT);
-		add(formL);
-		add(formT);
 		add(go);
 		
 		setVisible(true);
