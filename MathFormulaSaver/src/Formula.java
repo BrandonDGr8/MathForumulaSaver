@@ -63,7 +63,7 @@ public class Formula {
 			StringBuilder temp = new StringBuilder();
 			while((line = in.readLine()) != null){
 				if (!formula) {
-					temp.append(line);
+					temp.append(line+": ");
 					formula=true;
 				} else {
 					temp.append(line);
