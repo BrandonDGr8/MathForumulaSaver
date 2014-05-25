@@ -235,10 +235,10 @@ public class Formula {
 		return newForm;
 	}
 
-//	public static void main(String[] args) {
-//		System.out.println(setVariables("Formula"));
-//
-//	}
+	public static void main(String[] args) {
+		System.out.println(setVariables("Formula"));
+
+	}
 
 	//	public static int calculate(){
 	//		
